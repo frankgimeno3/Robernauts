@@ -4,24 +4,40 @@ window.onload = () => {
   class Robernaut {
     constructor() {
       this.x = 20;
-      this.y = 100;
+      this.y = 450;
       this.w = 50;
       this.h = 90;
-      this.vel = 10;
+      this.vel = 30;
       this.robernautImg = new Image();
-      this.robernautImg.src = "images/car.png";
+      this.robernautImg.src = "images/RobernautRedSingle.png";
     }
     print(ctx) {
       ctx.drawImage(this.robernautImg, this.x, this.y, this.w, this.h);
     }
     jump() {
       this.y -= this.vel;
+      setTimeout(()=>{
+        this.y -= this.vel;
+      }, 40)
+      setTimeout(()=>{
+        this.y -= this.vel;
+      }, 80)
+      setTimeout(()=>{
+        this.y += this.vel;
+      }, 260)
+
+      setTimeout(()=>{
+        this.y += this.vel;
+      }, 300)
+      setTimeout(()=>{
+        this.y += this.vel;
+      }, 340)
     }
     changeColorRed(){
-        this.robernautImg.src = "images/car2.png";
+        this.robernautImg.src = "images/RobernautBlueSingle.png";
       }
     changeColorBlue(){
-        this.robernautImg.src = "images/car.png";
+        this.robernautImg.src = "images/RobernautRedSingle.png";
       
     }
   }

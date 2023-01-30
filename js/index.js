@@ -6,35 +6,39 @@ window.onload = () => {
   class Robernaut {
     constructor() {
       this.x = 20;
-      this.y = 450;
+      this.y = 250;
       this.w = 50;
       this.h = 90;
-      this.vel = 30;
+      this.propulsion = 10;
       this.robernautImg = new Image();
       this.robernautImg.src = "images/RobernautRedSingle.png";
     }
     print(ctx) {
       ctx.drawImage(this.robernautImg, this.x, this.y, this.w, this.h);
     }
-    jump() {
-      this.y -= this.vel;
-      setTimeout(()=>{
-        this.y -= this.vel;
-      }, 40)
-      setTimeout(()=>{
-        this.y -= this.vel;
-      }, 80)
-      setTimeout(()=>{
-        this.y += this.vel;
-      }, 260)
-
-      setTimeout(()=>{
-        this.y += this.vel;
-      }, 300)
-      setTimeout(()=>{
-        this.y += this.vel;
-      }, 340)
+    
+    jetpack() {
+      let intervalId = setInterval(() => {
+        if (this.y >= 250) {
+          this.y -= this.propulsion;
+        } 
+        
+        else {
+          clearInterval(intervalId);
+          setTimeout(() => {
+            intervalId = setInterval(() => {
+              if (this.y < 450) {
+                this.y += this.propulsion;
+              } 
+              else{
+                clearInterval(intervalId);
+              }
+            }, 40);
+          }, 40);
+        }
+      }, 40);
     }
+
     changeColorRed(){
         this.robernautImg.src = "images/RobernautBlueSingle.png";
       }
@@ -44,19 +48,19 @@ window.onload = () => {
     }
   }
   class Obstaculo {
-    constructor(canvas, y, h, color) {
-      this.y = y;
-      this.w = 10
+    constructor(canvas, w, h, src) {
+      this.y = 40;
+      this.w = 150
       this.x = 928
-      this.h = h;
-      this.vel = 5;
-      this.color = color;
+      this.h = 450;
+      this.vel = 4;
+      this.obstacleImg = new Image();
+      this.obstacleImg.src = src;
     }
     print(ctx) {
-        ctx.fillStyle = this.color;
-
-      ctx.fillRect(this.x, this.y, this.w, this.h);
+      ctx.drawImage(this.obstacleImg, this.x, this.y, this.w, this.h);
     }
+    
     move() {
       this.x -= this.vel;
     }
@@ -109,21 +113,21 @@ window.onload = () => {
     recalculate() {
       if(this.iteracion == (Math.ceil(Math.random() * 75) + 35)) {
         //creo obstaculo
-        let obstaculo = new Obstaculo(this.canvas, 500, 50, "white");
+        let obstaculo = new Obstaculo(this.canvas, 150, 450, "images/jasmin.png");
         //lo añado al array
         this.obstaculos.push(obstaculo);
         this.iteracion = 0;
       }
       if(this.iteracion == (Math.ceil(Math.random() * 60) + 20)) {
         //creo obstaculo
-        let obstaculo = new Obstaculo(this.canvas, 450, 100, "blue");
+        let obstaculo = new Obstaculo(this.canvas, 150, 450, "images/redObstacle.png");
         //lo añado al array
         this.obstaculos.push(obstaculo);
         this.iteracion = 0;
       }
       if(this.iteracion == (Math.ceil(Math.random() * 60) + 20)) {
         //creo obstaculo
-        let obstaculo = new Obstaculo(this.canvas, 450, 100, "red");
+        let obstaculo = new Obstaculo(this.canvas, 150, 450, "images/blueObstacle.png");
         //lo añado al array
         this.obstaculos.push(obstaculo);
         this.iteracion = 0;
@@ -157,7 +161,10 @@ window.onload = () => {
   document.getElementsByTagName("body")[0].addEventListener("keydown", (event)=>{
     switch(event.key) {
       case "ArrowUp":
-        juego.astronaut.jump();
+        juego.astronaut.jetpack();
+        break;
+        case "ArroDown":
+        juego.astronaut.jetpack();
         break;
       case "ArrowLeft":
         juego.astronaut.changeColorRed();

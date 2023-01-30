@@ -15,26 +15,11 @@ window.onload = () => {
       ctx.drawImage(this.robernautImg, this.x, this.y, this.w, this.h);
     }
     
-    jetpack() {
-      let intervalId = setInterval(() => {
-        if (this.y >= 250) {
-          this.y -= this.propulsion;
-        } 
-        
-        else {
-          clearInterval(intervalId);
-          setTimeout(() => {
-            intervalId = setInterval(() => {
-              if (this.y < 450) {
-                this.y += this.propulsion;
-              } 
-              else{
-                clearInterval(intervalId);
-              }
-            }, 40);
-          }, 40);
-        }
-      }, 40);
+    jetpackUp() {
+      this.y -= this.propulsion;
+    }
+    jetpackDown() {
+      this.y += this.propulsion;
     }
 
     changeColorRed(){
@@ -46,11 +31,11 @@ window.onload = () => {
     }
   }
   class Obstaculo {
-    constructor(canvas, w, h, src) {
-      this.y = 40;
-      this.w = 150
-      this.x = 928
-      this.h = 450;
+    constructor(canvas, y, w, h,  src) {
+      this.y = y;
+      this.w = w; 
+      this.x = 1500;
+      this.h = h;
       this.vel = 4;
       this.obstacleImg = new Image();
       this.obstacleImg.src = src;
@@ -62,6 +47,10 @@ window.onload = () => {
     move() {
       this.x -= this.vel;
     }
+
+    accelerate(){
+      this.x -=10;
+    }
   }
   
   class Juego {
@@ -69,7 +58,7 @@ window.onload = () => {
       this.canvas = document.getElementById("canvas");
       this.ctx = this.canvas.getContext("2d");
       this.roadImg = document.createElement("img");
-      this.roadImg.src = "images/backgroundSky.jpg";
+      this.roadImg.src = "images/backgroundSpace.jpg";
       this.astronaut = new Robernaut();
       // this.obstaculo = new Obstaculo();
       this.obstaculos = [];
@@ -109,23 +98,22 @@ window.onload = () => {
       });
     }
     recalculate() {
-      if(this.iteracion == (Math.ceil(Math.random() * 75) + 35)) {
+      if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
         //creo obstaculo
-        let obstaculo = new Obstaculo(this.canvas, 150, 450, "images/jasmin.png");
+        let obstaculo = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 120, 120, "images/jasmin.png");
+        //lo añado al array
+        this.obstaculos.push(obstaculo);
+      }
+      if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
+        //creo obstaculo
+        let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, "images/redObstacle.png");
         //lo añado al array
         this.obstaculos.push(obstaculo);
         this.iteracion = 0;
       }
-      if(this.iteracion == (Math.ceil(Math.random() * 60) + 20)) {
+      if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
         //creo obstaculo
-        let obstaculo = new Obstaculo(this.canvas, 150, 450, "images/redObstacle.png");
-        //lo añado al array
-        this.obstaculos.push(obstaculo);
-        this.iteracion = 0;
-      }
-      if(this.iteracion == (Math.ceil(Math.random() * 60) + 20)) {
-        //creo obstaculo
-        let obstaculo = new Obstaculo(this.canvas, 150, 450, "images/blueObstacle.png");
+        let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, "images/blueObstacle.png");
         //lo añado al array
         this.obstaculos.push(obstaculo);
         this.iteracion = 0;
@@ -159,19 +147,20 @@ window.onload = () => {
   document.getElementsByTagName("body")[0].addEventListener("keydown", (event)=>{
     switch(event.key) {
       case "ArrowUp":
-        juego.astronaut.jetpack();
+        juego.astronaut.jetpackUp();
         break;
-        case "ArroDown":
-        juego.astronaut.jetpack();
+      case "ArrowDown":
+        juego.astronaut.jetpackDown();
         break;
       case "ArrowLeft":
         juego.astronaut.changeColorRed();
-        console.log("it happened");
         break;
       case "ArrowRight":
           juego.astronaut.changeColorBlue();
-          console.log("it happened");
-          break;
+        break;
+      case "Spacebar":
+          juego.Obstaculo.accelerate();
+        break;
         
     }
   });

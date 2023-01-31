@@ -7,7 +7,7 @@ window.onload = () => {
       this.y = 250;
       this.w = 50;
       this.h = 90;
-      this.propulsion = 10;
+      this.propulsion = 2;
       this.robernautImg = new Image();
       this.robernautImg.src = "images/RobernautRedSingle.png";
     }
@@ -17,8 +17,25 @@ window.onload = () => {
     
     jetpackUp() {
       this.y -= this.propulsion;
+      this.y -= this.propulsion;
+      this.y -= this.propulsion;
+      this.y -= this.propulsion;
+      this.y -= this.propulsion;
+      this.y -= this.propulsion;
+      this.y -= this.propulsion;
+      this.y -= this.propulsion;
+      this.y -= this.propulsion;
+      this.y -= this.propulsion;
+
     }
     jetpackDown() {
+      this.y += this.propulsion;
+      this.y += this.propulsion;
+      this.y += this.propulsion;
+      this.y += this.propulsion;
+      this.y += this.propulsion;
+      this.y += this.propulsion;
+      this.y += this.propulsion;
       this.y += this.propulsion;
     }
 
@@ -27,8 +44,21 @@ window.onload = () => {
       }
     changeColorBlue(){
         this.robernautImg.src = "images/RobernautRedSingle.png";
-      
     }
+    // fadeOut(){
+    //   let opacity = 0.8;
+    //   let fadeOutInterval = setInterval(drawImage, 50);
+    //   function drawImage() {
+    //     ctx.clearRect(this.x, this.y, this.width, this.height);
+    //     ctx.globalAlpha = opacity;
+    //     ctx.drawImage(this.robernautImg, this.x, this.y);
+    //     opacity -= 0.05;
+    //     if (opacity <= 0.1) {
+    //       clearInterval(fadeOutInterval);
+    //     }
+    //     else{opacity = 0.8}
+    //   }
+    // }
   }
   class Obstaculo {
     constructor(canvas, y, w, h,  src) {
@@ -57,8 +87,8 @@ window.onload = () => {
     constructor() {
       this.canvas = document.getElementById("canvas");
       this.ctx = this.canvas.getContext("2d");
-      this.roadImg = document.createElement("img");
-      this.roadImg.src = "images/backgroundSpace.jpg";
+      this.fondoImg = document.createElement("img");
+      this.fondoImg.src = "images/backgroundSpace.jpg";
       this.astronaut = new Robernaut();
       // this.obstaculo = new Obstaculo();
       this.obstaculos = [];
@@ -89,7 +119,7 @@ window.onload = () => {
     }
     print() {
       //fondo
-      this.ctx.drawImage(this.roadImg, 0, 0, this.canvas.width, this.canvas.height);
+      this.ctx.drawImage(this.fondoImg, 0, 0, this.canvas.width, this.canvas.height);
       //  
       this.astronaut.print(this.ctx);
       //obst
@@ -99,37 +129,29 @@ window.onload = () => {
     }
     recalculate() {
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
-        //creo obstaculo
         let obstaculo = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 120, 120, "images/jasmin.png");
-        //lo añado al array
         this.obstaculos.push(obstaculo);
       }
+
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        //creo obstaculo
         let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, "images/redObstacle.png");
-        //lo añado al array
         this.obstaculos.push(obstaculo);
         this.iteracion = 0;
       }
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        //creo obstaculo
         let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, "images/blueObstacle.png");
-        //lo añado al array
         this.obstaculos.push(obstaculo);
         this.iteracion = 0;
       }
       if(this.iteracion>90){ this.iteracion = 0;}
-      //recorro array obstaculos:
       this.obstaculos.forEach(obstaculo => {
-          //cambio posiciones
           obstaculo.move();
-          //controlo colisiones
-          // if(!( this.astronaut.x + this.astronaut.w < obstaculo.x || 
-          //   this.astronaut.x > obstaculo.x + obstaculo.w || 
-          //   this.astronaut.y > obstaculo.y + obstaculo.h ||
-          //   this.astronaut.y + this.astronaut.h < obstaculo.y) ) {
-          //     this.stop();
-          //   }
+          // controlo colisiones
+          if(!( this.astronaut.x + this.astronaut.w < obstaculo.x || this.astronaut.x > obstaculo.x + obstaculo.w || 
+            this.astronaut.y > obstaculo.y + obstaculo.h ||
+            this.astronaut.y + this.astronaut.h < obstaculo.y) ) {
+              this.stop();
+            }
       })
     }
   }
@@ -165,3 +187,6 @@ window.onload = () => {
     }
   });
 };
+
+
+

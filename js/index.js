@@ -1,3 +1,4 @@
+
 window.onload = () => {
   //cuando haya cargado window ejecuta código
 
@@ -145,13 +146,13 @@ window.onload = () => {
       }
       if(this.iteracion>90){ this.iteracion = 0;}
       this.obstaculos.forEach(obstaculo => {
-          obstaculo.move();
+        obstaculo.move();
           // controlo colisiones
-          if(!( this.astronaut.x + this.astronaut.w < obstaculo.x || this.astronaut.x > obstaculo.x + obstaculo.w || 
-            this.astronaut.y > obstaculo.y + obstaculo.h ||
-            this.astronaut.y + this.astronaut.h < obstaculo.y) ) {
-              this.stop();
-            }
+        // if(!( this.astronaut.x + this.astronaut.w < obstaculo.x+this.astronaut.w || this.astronaut.x > obstaculo.x + obstaculo.w || 
+        //     this.astronaut.y > obstaculo.y + obstaculo.h ||
+        //     this.astronaut.y + this.astronaut.h < obstaculo.y) ) {
+        //       this.stop();
+        //     }
       })
     }
   }

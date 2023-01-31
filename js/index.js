@@ -2,6 +2,8 @@
 window.onload = () => {
   //cuando haya cargado window ejecuta código
 
+  //prueba
+
   class Robernaut {
     constructor() {
       this.x = 20;

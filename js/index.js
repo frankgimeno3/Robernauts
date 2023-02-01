@@ -2,10 +2,10 @@
 window.onload = () => {
   //cuando haya cargado window ejecuta código
 
-  const btn = document.getElementById('titleGame');
-  btn.addEventListener('click', () => {
-    btn.style.display = 'none';
-  });
+  // const btn = document.getElementById('titleGame');
+  // btn.addEventListener('click', () => {
+  //   btn.style.display = 'none';
+  // });
 
     const TOP_LIMIT_ROBERNAUT = 100;
     const DOWN_LIMIT_ROBERNAUT = 450;
@@ -185,7 +185,7 @@ window.onload = () => {
 
   let juego = new Juego();
 
-  startGame();
+  // startGame();
   
 
   function startGame() {
@@ -215,8 +215,20 @@ window.onload = () => {
         
     }
   });
-  //score
-  
+
+// function startingBackground() {
+//   this.canvas = document.getElementById("canvas");
+//   this.ctx = this.canvas.getContext("2d");
+//   this.fondoImg = document.createElement("img");
+//   this.fondoImg.src = "images/backgroundSpace.jpg";
+// }
+
+const btn = document.getElementById('titleGame');
+  btn.addEventListener('click', () => {
+    btn.style.display = 'none';
+    startGame();
+
+  });
 
 //obstaculos
 }

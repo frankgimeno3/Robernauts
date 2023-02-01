@@ -21,6 +21,7 @@ window.onload = () => {
       this.robernautImg.src = "images/astro_red.png";
       this.astronautColor = "red";
       this.isTransparent = false;
+      this.damaged=false;
     }
     print(ctx) {
       ctx.drawImage(this.robernautImg, this.x, this.y, this.w, this.h);
@@ -99,7 +100,7 @@ window.onload = () => {
       this.score = 0;
       this.intervalId = undefined;
       this.iteracion = 0;
-      this.lives = 300;
+      this.lifes = 3;
     }
     start() {
       // if(!this.intervalId) {
@@ -118,14 +119,17 @@ window.onload = () => {
     stop() {
       if(this.intervalId) clearInterval(this.intervalId);
     }
-    lifelossAnimation(){
-      console.log(this.lives)
-    }
+
     damage(){
-      this.lives --;
-      if(this.lives>0){lifelossAnimation();
+      if(this.astronaut.damaged == false){
+        this.astronaut.damaged = true
+        this.lifes -=1
+        setTimeout(()=>{this.astronaut.damaged=false}, 350)
       }
-      else{this.stop()}
+      console.log(this.lifes)
+      if(this.lifes == 0){
+        this.stop()
+      }
     }
     clear() {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

@@ -1,0 +1,107 @@
+body {
+  padding: 0;
+  text-align: center;
+  cursor:cell;
+}
+
+.game-intro {
+  float: left;
+  padding: 0% 10%;
+}
+
+.game-intro p {
+  font-size: 18px;
+  font-family: "Verdana"
+}
+
+.logo-img {
+  width: 350px;
+}
+
+.arrows-img {
+  width: 150px;
+}
+#titleGame{
+  z-index: 2;
+  position: fixed;
+  top: 1em;
+  left: 320px;
+
+}
+ 
+ button {
+  font-size: 30px;
+  background-color: #141f72;
+  color: rgba(255, 255, 255, 0.751);
+  padding: 20px 40px;
+  border: 0;
+  box-shadow: 0 0 5px rgb(14, 5, 112), 0 0 25px rgb(14, 5, 112);
+  border-radius: 5px;
+  margin-bottom: 20px;
+  position: absolute;
+  z-index: 2;
+  left: 300px;
+  top:10em;
+  transition: 0.03s;
+  animation: animate 5s linear infinite;
+}
+button:hover{
+  box-shadow: 0 0 5px rgb(14, 5, 112), 0 0 25px rgb(14, 5, 112), 0 0 50px rgb(14, 5, 112 ), 0 0 100px rgb(14, 5, 112), 0 0 200px rgb(14, 5, 112);
+  letter-spacing: 2px; 
+}
+@keyframes animate {
+  0%{filter:hue-rotate(0deg);}
+  100%{filter:hue-rotate(100deg);}
+}
+#titleGame{
+  font-size: 60px;
+  background-color: #141f7200;
+  color: rgba(255, 255, 255, 0.753);
+  padding: 20px 40px;
+  border: 0;
+  box-shadow: 0;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-shadow: 0 0 5px rgb(0, 0, 2), 0 0 30px rgba(0, 0, 2 ), 0 0 90px rgba(0, 0, 2), 0 0 150px rgba(0, 0, 2), 0 0 200px rgba(0, 0 ,2), 0 0 300px rgba(0, 0 ,2), 0 0 400px rgba(0, 0, 2), 0 0 500px rgba(0, 0, 2), 0 0 600px rgba(0, 0 ,2), 0 0 700px rgba(0, 0, 2);
+}
+
+#game-board {
+    float: left;
+    padding: 20px 0px;
+}
+#canvas{
+    width: 100%;
+    height: 100%;
+    position: center;
+    border-radius: 40px;
+    
+    
+}
+
+/* ul{
+  position: relative;
+  display: flex;
+}
+ul li{
+  position: relative;
+  list-style: none;
+  margin: 0 20px;
+  cursor: pointer;
+}
+ul li a{
+  text-decoration: none;
+}
+ul li a .fa-brands {
+  font-size: 6em;
+  color:#222;
+}
+ul li::before{
+  font-family:"FontAwesome";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  overflow: hidden;
+  transition: 0.5 ease-in-out;;
+} */

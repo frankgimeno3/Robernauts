@@ -1,18 +1,27 @@
 
 window.onload = () => {
   //cuando haya cargado window ejecuta código
-  
+
+const btn = document.getElementById('titleGame');
+btn.addEventListener('click', () => {
+  btn.style.display = 'none';
+});
+
+
+
   //prueba
+    const TOP_LIMIT_ROBERNAUT = 140;
+    const DOWN_LIMIT_ROBERNAUT = 400;
 
   class Robernaut {
     constructor() {
       this.x = 20;
       this.y = 250;
-      this.w = 120;
-      this.h = 120;
+      this.w = 60;
+      this.h = 90;
       this.propulsion = 2;
       this.robernautImg = new Image();
-      this.robernautImg.src = "images/RobernautRedSingle.png";
+      this.robernautImg.src = "images/astro_red.png";
       this.astronautColor = "red";
       this.isTransparent = false;
     }
@@ -21,6 +30,7 @@ window.onload = () => {
     }
     
     jetpackUp() {
+      if(this.y <= TOP_LIMIT_ROBERNAUT) this.y = TOP_LIMIT_ROBERNAUT;
       this.y -= this.propulsion;
       this.y -= this.propulsion;
       this.y -= this.propulsion;
@@ -34,6 +44,7 @@ window.onload = () => {
 
     }
     jetpackDown() {
+      if(this.y >= DOWN_LIMIT_ROBERNAUT) this.y = DOWN_LIMIT_ROBERNAUT;
       this.y += this.propulsion;
       this.y += this.propulsion;
       this.y += this.propulsion;
@@ -45,37 +56,27 @@ window.onload = () => {
     }
 
     changeColorRed(){
-        this.robernautImg.src = "images/RobernautBlueSingle.png";
-        this.astronautColor = "blue";
+        this.astronautColor = "red";
+        this.robernautImg.src = "images/astro_red.png";
       }
     changeColorBlue(){
-        this.robernautImg.src = "images/RobernautRedSingle.png";
-        this.astronautColor = "red";
+        this.robernautImg.src = "images/astro_blue.png";
+        this.astronautColor = "blue";
+
     }
-    // fadeOut(){
-    //   let opacity = 0.8;
-    //   let fadeOutInterval = setInterval(drawImage, 50);
-    //   function drawImage() {
-    //     ctx.clearRect(this.x, this.y, this.width, this.height);
-    //     ctx.globalAlpha = opacity;
-    //     ctx.drawImage(this.robernautImg, this.x, this.y);
-    //     opacity -= 0.05;
-    //     if (opacity <= 0.1) {
-    //       clearInterval(fadeOutInterval);
-    //     }
-    //     else{opacity = 0.8}
-    //   }
-    // }
-  }
+     }
   class Obstaculo {
-    constructor(canvas, y, w, h, src, type) {
+    constructor(canvas, y, w, h,vel, src, type) {
       this.y = y;
       this.w = w; 
       this.x = 1500;
       this.h = h;
-      this.vel = 4;
+      this.vel = vel;
       this.obstacleImg = new Image();
       this.obstacleImg.src = src;
+
+
+
       this.type = type;
     }
     print(ctx) {
@@ -89,6 +90,8 @@ window.onload = () => {
     accelerate(){
       this.x -=10;
     }
+
+
   }
   
   class Juego {
@@ -98,6 +101,10 @@ window.onload = () => {
       this.fondoImg = document.createElement("img");
       this.fondoImg.src = "images/backgroundSpace.jpg";
       this.astronaut = new Robernaut();
+
+      ////
+
+      
       // this.obstaculo = new Obstaculo();
       this.obstaculos = [];
       this.score = 0;
@@ -142,7 +149,7 @@ window.onload = () => {
     }
     recalculate() {
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
-        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 150, 60, "images/jasmin.png", "meteor");
+        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
         this.obstaculos.push(obstaculoMeteorito);
         this.iteracion = 0;
 
@@ -150,7 +157,7 @@ window.onload = () => {
 
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
         let obstaculoRojo = new Obstaculo(this.canvas, 0, 200, 600, "images/redObstacle.png", "redStarship");
-        this.obstaculos.push(obstaculoRojo);
+        this.obstaculos.push(obstaculo);
         this.iteracion = 0;
       }
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
@@ -186,6 +193,7 @@ window.onload = () => {
   
 
   function startGame() {
+   
     juego.start();
   }
 
@@ -193,7 +201,8 @@ window.onload = () => {
   document.getElementsByTagName("body")[0].addEventListener("keydown", (event)=>{
     switch(event.key) {
       case "ArrowUp":
-        juego.astronaut.jetpackUp();
+        juego.astronaut.jetpackUp();  
+      
         break;
       case "ArrowDown":
         juego.astronaut.jetpackDown();
@@ -210,7 +219,12 @@ window.onload = () => {
         
     }
   });
-};
+  //score
+  
+
+//obstaculos
+}
+
 
 
 

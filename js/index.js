@@ -2,6 +2,12 @@
 window.onload = () => {
   //cuando haya cargado window ejecuta código
 
+const btn = document.getElementById('titleGame');
+btn.addEventListener('click', () => {
+  btn.style.display = 'none';
+});
+
+
   //prueba
 
   class Robernaut {
@@ -19,27 +25,27 @@ window.onload = () => {
     }
     
     jetpackUp() {
-      this.y -= this.propulsion;
-      this.y -= this.propulsion;
-      this.y -= this.propulsion;
-      this.y -= this.propulsion;
-      this.y -= this.propulsion;
-      this.y -= this.propulsion;
-      this.y -= this.propulsion;
-      this.y -= this.propulsion;
-      this.y -= this.propulsion;
-      this.y -= this.propulsion;
+      this.y -= this.propulsion + 15;
+      // this.y -= this.propulsion;
+      // this.y -= this.propulsion;
+      // this.y -= this.propulsion;
+      // this.y -= this.propulsion;
+      // this.y -= this.propulsion;
+      // this.y -= this.propulsion;
+      // this.y -= this.propulsion;
+      // this.y -= this.propulsion;
+      // this.y -= this.propulsion;
 
     }
     jetpackDown() {
-      this.y += this.propulsion;
-      this.y += this.propulsion;
-      this.y += this.propulsion;
-      this.y += this.propulsion;
-      this.y += this.propulsion;
-      this.y += this.propulsion;
-      this.y += this.propulsion;
-      this.y += this.propulsion;
+      this.y += this.propulsion + 15;
+      // this.y += this.propulsion;
+      // this.y += this.propulsion;
+      // this.y += this.propulsion;
+      // this.y += this.propulsion;
+      // this.y += this.propulsion;
+      // this.y += this.propulsion;
+      // this.y += this.propulsion;
     }
 
     changeColorRed(){
@@ -69,9 +75,11 @@ window.onload = () => {
       this.w = w; 
       this.x = 1500;
       this.h = h;
-      this.vel = 4;
+      this.vel = 9;
       this.obstacleImg = new Image();
       this.obstacleImg.src = src;
+    
+
     }
     print(ctx) {
       ctx.drawImage(this.obstacleImg, this.x, this.y, this.w, this.h);
@@ -84,6 +92,8 @@ window.onload = () => {
     accelerate(){
       this.x -=10;
     }
+
+
   }
   
   class Juego {
@@ -93,6 +103,10 @@ window.onload = () => {
       this.fondoImg = document.createElement("img");
       this.fondoImg.src = "images/backgroundSpace.jpg";
       this.astronaut = new Robernaut();
+
+      ////
+
+      
       // this.obstaculo = new Obstaculo();
       this.obstaculos = [];
       this.score = 0;
@@ -134,6 +148,7 @@ window.onload = () => {
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
         let obstaculo = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 120, 120, "images/jasmin.png");
         this.obstaculos.push(obstaculo);
+
       }
 
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
@@ -165,6 +180,7 @@ window.onload = () => {
   
 
   function startGame() {
+   
     juego.start();
   }
 
@@ -172,7 +188,8 @@ window.onload = () => {
   document.getElementsByTagName("body")[0].addEventListener("keydown", (event)=>{
     switch(event.key) {
       case "ArrowUp":
-        juego.astronaut.jetpackUp();
+        juego.astronaut.jetpackUp();  
+      
         break;
       case "ArrowDown":
         juego.astronaut.jetpackDown();
@@ -189,7 +206,12 @@ window.onload = () => {
         
     }
   });
-};
+  //score
+  
+
+//obstaculos
+}
+
 
 
 

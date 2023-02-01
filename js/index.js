@@ -130,6 +130,7 @@ window.onload = () => {
       if(this.lifes == 0){
         this.stop()
       }
+      
     }
     clear() {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

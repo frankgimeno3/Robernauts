@@ -1,18 +1,20 @@
 
 window.onload = () => {
   //cuando haya cargado window ejecuta código
-
+  
   //prueba
 
   class Robernaut {
     constructor() {
       this.x = 20;
       this.y = 250;
-      this.w = 50;
-      this.h = 90;
+      this.w = 120;
+      this.h = 120;
       this.propulsion = 2;
       this.robernautImg = new Image();
       this.robernautImg.src = "images/RobernautRedSingle.png";
+      this.astronautColor = "red";
+      this.isTransparent = false;
     }
     print(ctx) {
       ctx.drawImage(this.robernautImg, this.x, this.y, this.w, this.h);
@@ -44,9 +46,11 @@ window.onload = () => {
 
     changeColorRed(){
         this.robernautImg.src = "images/RobernautBlueSingle.png";
+        this.astronautColor = "blue";
       }
     changeColorBlue(){
         this.robernautImg.src = "images/RobernautRedSingle.png";
+        this.astronautColor = "red";
     }
     // fadeOut(){
     //   let opacity = 0.8;
@@ -64,7 +68,7 @@ window.onload = () => {
     // }
   }
   class Obstaculo {
-    constructor(canvas, y, w, h,  src) {
+    constructor(canvas, y, w, h, src, type) {
       this.y = y;
       this.w = w; 
       this.x = 1500;
@@ -72,6 +76,7 @@ window.onload = () => {
       this.vel = 4;
       this.obstacleImg = new Image();
       this.obstacleImg.src = src;
+      this.type = type;
     }
     print(ctx) {
       ctx.drawImage(this.obstacleImg, this.x, this.y, this.w, this.h);
@@ -98,6 +103,7 @@ window.onload = () => {
       this.score = 0;
       this.intervalId = undefined;
       this.iteracion = 0;
+      this.lives = 3;
     }
     start() {
       // if(!this.intervalId) {
@@ -117,6 +123,10 @@ window.onload = () => {
     stop() {
       if(this.intervalId) clearInterval(this.intervalId);
     }
+    damage(){
+      this.lives --;
+      lifelossAnimation();
+    }
     clear() {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
@@ -132,29 +142,40 @@ window.onload = () => {
     }
     recalculate() {
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
-        let obstaculo = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 120, 120, "images/jasmin.png");
-        this.obstaculos.push(obstaculo);
+        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 150, 60, "images/jasmin.png", "meteor");
+        this.obstaculos.push(obstaculoMeteorito);
+        this.iteracion = 0;
+
       }
 
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, "images/redObstacle.png");
-        this.obstaculos.push(obstaculo);
+        let obstaculoRojo = new Obstaculo(this.canvas, 0, 200, 600, "images/redObstacle.png", "redStarship");
+        this.obstaculos.push(obstaculoRojo);
         this.iteracion = 0;
       }
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, "images/blueObstacle.png");
-        this.obstaculos.push(obstaculo);
+        let obstaculoAzul = new Obstaculo(this.canvas, 0, 200, 600, "images/blueObstacle.png", "blueStarship");
+        this.obstaculos.push(obstaculoAzul);
         this.iteracion = 0;
       }
       if(this.iteracion>90){ this.iteracion = 0;}
       this.obstaculos.forEach(obstaculo => {
         obstaculo.move();
           // controlo colisiones
-        // if(!( this.astronaut.x + this.astronaut.w < obstaculo.x+this.astronaut.w || this.astronaut.x > obstaculo.x + obstaculo.w || 
-        //     this.astronaut.y > obstaculo.y + obstaculo.h ||
-        //     this.astronaut.y + this.astronaut.h < obstaculo.y) ) {
-        //       this.stop();
-        //     }
+        if(!(this.astronaut.x + this.astronaut.w < obstaculo.x+80 || this.astronaut.x > obstaculo.x+obstaculo.w-80)){
+          if(!(this.astronaut.y+this.astronaut.h < obstaculo.y || this.astronaut.y > obstaculo.y+obstaculo.h)){
+            if(this.astronaut.astronautColor == "blue"){
+              if(obstaculo.type == "redStarship" || obstaculo.type == "meteor"){
+                console.log("PETA BLUE")
+                this.stop();}
+            }
+            if(this.astronaut.astronautColor == "red"){
+              if(obstaculo.type == "blueStarship" || obstaculo.type == "meteor"){
+                console.log("PETA RED")
+                this.damage();}
+            }
+          }
+        }
       })
     }
   }

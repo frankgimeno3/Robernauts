@@ -1,7 +1,7 @@
 body {
   padding: 0;
   text-align: center;
-  cursor:cell;
+  background-image: url("/images/bg.gif");
 }
 
 .game-intro {
@@ -9,18 +9,18 @@ body {
   padding: 0% 10%;
 }
 
-.game-intro p {
+/* .game-intro p {
   font-size: 18px;
   font-family: "Verdana"
-}
+} */
 
-.logo-img {
+/* .logo-img {
   width: 350px;
-}
+} */
 
-.arrows-img {
+/* .arrows-img {
   width: 150px;
-}
+} */
 #titleGame{
   z-index: 2;
   position: fixed;
@@ -28,8 +28,7 @@ body {
   left: 320px;
 
 }
- 
- button {
+  button {
   font-size: 30px;
   background-color: #141f72;
   color: rgba(255, 255, 255, 0.751);

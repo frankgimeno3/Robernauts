@@ -2,6 +2,13 @@
 window.onload = () => {
   //cuando haya cargado window ejecuta código
 
+const btn = document.getElementById('titleGame');
+btn.addEventListener('click', () => {
+  btn.style.display = 'none';
+});
+
+
+
   //prueba
     const TOP_LIMIT_ROBERNAUT = 140;
     const DOWN_LIMIT_ROBERNAUT = 400;
@@ -15,6 +22,8 @@ window.onload = () => {
       this.propulsion = 2;
       this.robernautImg = new Image();
       this.robernautImg.src = "images/astro_red.png";
+      this.astronautColor = "red";
+      this.isTransparent = false;
     }
     print(ctx) {
       ctx.drawImage(this.robernautImg, this.x, this.y, this.w, this.h);
@@ -47,35 +56,17 @@ window.onload = () => {
     }
 
     changeColorRed(){
+        this.astronautColor = "red";
         this.robernautImg.src = "images/astro_red.png";
       }
     changeColorBlue(){
         this.robernautImg.src = "images/astro_blue.png";
-    }
-    lifeLossAnimation(){
-
-
-const images = [new Image(), new Image(), new Image()];
-images[0].src = "image1.png";
-images[1].src = "image2.png";
-images[2].src = "image3.png";
-
-let i = 0;
-
-// draw each image in turn with a time delay
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(images[i], 0, 0);
-  i = (i + 1) % images.length;
-}
-
-// call the draw function every 1000 milliseconds (1 second)
-setInterval(draw, 1000);
+        this.astronautColor = "blue";
 
     }
-  }
+     }
   class Obstaculo {
-    constructor(canvas, y, w, h, vel, src) {
+    constructor(canvas, y, w, h,vel, src, type) {
       this.y = y;
       this.w = w; 
       this.x = 1500;
@@ -83,6 +74,10 @@ setInterval(draw, 1000);
       this.vel = vel;
       this.obstacleImg = new Image();
       this.obstacleImg.src = src;
+
+
+
+      this.type = type;
     }
     print(ctx) {
       ctx.drawImage(this.obstacleImg, this.x, this.y, this.w, this.h);
@@ -95,6 +90,8 @@ setInterval(draw, 1000);
     accelerate(){
       this.x -=10;
     }
+
+
   }
   
   class Juego {
@@ -104,11 +101,16 @@ setInterval(draw, 1000);
       this.fondoImg = document.createElement("img");
       this.fondoImg.src = "images/backgroundSpace.jpg";
       this.astronaut = new Robernaut();
+
+      ////
+
+      
       // this.obstaculo = new Obstaculo();
       this.obstaculos = [];
       this.score = 0;
       this.intervalId = undefined;
       this.iteracion = 0;
+      this.lives = 3;
     }
     start() {
       // if(!this.intervalId) {
@@ -128,6 +130,10 @@ setInterval(draw, 1000);
     stop() {
       if(this.intervalId) clearInterval(this.intervalId);
     }
+    damage(){
+      this.lives --;
+      lifelossAnimation();
+    }
     clear() {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
@@ -143,29 +149,40 @@ setInterval(draw, 1000);
     }
     recalculate() {
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
-        let obstaculo = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 120, 120, ((Math.random()*10)+10),"images/jasmin.png");
-        this.obstaculos.push(obstaculo);
+        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
+        this.obstaculos.push(obstaculoMeteorito);
+        this.iteracion = 0;
+
       }
 
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, 4, "images/redObstacle.png");
+        let obstaculoRojo = new Obstaculo(this.canvas, 0, 200, 600, "images/redObstacle.png", "redStarship");
         this.obstaculos.push(obstaculo);
         this.iteracion = 0;
       }
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, 4, "images/blueObstacle.png");
-        this.obstaculos.push(obstaculo);
+        let obstaculoAzul = new Obstaculo(this.canvas, 0, 200, 600, "images/blueObstacle.png", "blueStarship");
+        this.obstaculos.push(obstaculoAzul);
         this.iteracion = 0;
       }
       if(this.iteracion>90){ this.iteracion = 0;}
       this.obstaculos.forEach(obstaculo => {
         obstaculo.move();
           // controlo colisiones
-        // if(!( this.astronaut.x + this.astronaut.w < obstaculo.x+this.astronaut.w || this.astronaut.x > obstaculo.x + obstaculo.w || 
-        //     this.astronaut.y > obstaculo.y + obstaculo.h ||
-        //     this.astronaut.y + this.astronaut.h < obstaculo.y) ) {
-        //       this.stop();
-        //     }
+        if(!(this.astronaut.x + this.astronaut.w < obstaculo.x+80 || this.astronaut.x > obstaculo.x+obstaculo.w-80)){
+          if(!(this.astronaut.y+this.astronaut.h < obstaculo.y || this.astronaut.y > obstaculo.y+obstaculo.h)){
+            if(this.astronaut.astronautColor == "blue"){
+              if(obstaculo.type == "redStarship" || obstaculo.type == "meteor"){
+                console.log("PETA BLUE")
+                this.stop();}
+            }
+            if(this.astronaut.astronautColor == "red"){
+              if(obstaculo.type == "blueStarship" || obstaculo.type == "meteor"){
+                console.log("PETA RED")
+                this.damage();}
+            }
+          }
+        }
       })
     }
   }
@@ -176,6 +193,7 @@ setInterval(draw, 1000);
   
 
   function startGame() {
+   
     juego.start();
   }
 
@@ -183,7 +201,8 @@ setInterval(draw, 1000);
   document.getElementsByTagName("body")[0].addEventListener("keydown", (event)=>{
     switch(event.key) {
       case "ArrowUp":
-        juego.astronaut.jetpackUp();
+        juego.astronaut.jetpackUp();  
+      
         break;
       case "ArrowDown":
         juego.astronaut.jetpackDown();
@@ -200,7 +219,12 @@ setInterval(draw, 1000);
         
     }
   });
-};
+  //score
+  
+
+//obstaculos
+}
+
 
 
 

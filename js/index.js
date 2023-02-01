@@ -3,22 +3,25 @@ window.onload = () => {
   //cuando haya cargado window ejecuta código
 
   //prueba
+    const TOP_LIMIT_ROBERNAUT = 140;
+    const DOWN_LIMIT_ROBERNAUT = 400;
 
   class Robernaut {
     constructor() {
       this.x = 20;
       this.y = 250;
-      this.w = 50;
+      this.w = 60;
       this.h = 90;
       this.propulsion = 2;
       this.robernautImg = new Image();
-      this.robernautImg.src = "images/RobernautRedSingle.png";
+      this.robernautImg.src = "images/astro_red.png";
     }
     print(ctx) {
       ctx.drawImage(this.robernautImg, this.x, this.y, this.w, this.h);
     }
     
     jetpackUp() {
+      if(this.y <= TOP_LIMIT_ROBERNAUT) this.y = TOP_LIMIT_ROBERNAUT;
       this.y -= this.propulsion;
       this.y -= this.propulsion;
       this.y -= this.propulsion;
@@ -32,6 +35,7 @@ window.onload = () => {
 
     }
     jetpackDown() {
+      if(this.y >= DOWN_LIMIT_ROBERNAUT) this.y = DOWN_LIMIT_ROBERNAUT;
       this.y += this.propulsion;
       this.y += this.propulsion;
       this.y += this.propulsion;
@@ -43,33 +47,40 @@ window.onload = () => {
     }
 
     changeColorRed(){
-        this.robernautImg.src = "images/RobernautBlueSingle.png";
+        this.robernautImg.src = "images/astro_red.png";
       }
     changeColorBlue(){
-        this.robernautImg.src = "images/RobernautRedSingle.png";
+        this.robernautImg.src = "images/astro_blue.png";
     }
-    // fadeOut(){
-    //   let opacity = 0.8;
-    //   let fadeOutInterval = setInterval(drawImage, 50);
-    //   function drawImage() {
-    //     ctx.clearRect(this.x, this.y, this.width, this.height);
-    //     ctx.globalAlpha = opacity;
-    //     ctx.drawImage(this.robernautImg, this.x, this.y);
-    //     opacity -= 0.05;
-    //     if (opacity <= 0.1) {
-    //       clearInterval(fadeOutInterval);
-    //     }
-    //     else{opacity = 0.8}
-    //   }
-    // }
+    lifeLossAnimation(){
+
+
+const images = [new Image(), new Image(), new Image()];
+images[0].src = "image1.png";
+images[1].src = "image2.png";
+images[2].src = "image3.png";
+
+let i = 0;
+
+// draw each image in turn with a time delay
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(images[i], 0, 0);
+  i = (i + 1) % images.length;
+}
+
+// call the draw function every 1000 milliseconds (1 second)
+setInterval(draw, 1000);
+
+    }
   }
   class Obstaculo {
-    constructor(canvas, y, w, h,  src) {
+    constructor(canvas, y, w, h, vel, src) {
       this.y = y;
       this.w = w; 
       this.x = 1500;
       this.h = h;
-      this.vel = 4;
+      this.vel = vel;
       this.obstacleImg = new Image();
       this.obstacleImg.src = src;
     }
@@ -132,17 +143,17 @@ window.onload = () => {
     }
     recalculate() {
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
-        let obstaculo = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 120, 120, "images/jasmin.png");
+        let obstaculo = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 120, 120, ((Math.random()*10)+10),"images/jasmin.png");
         this.obstaculos.push(obstaculo);
       }
 
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, "images/redObstacle.png");
+        let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, 4, "images/redObstacle.png");
         this.obstaculos.push(obstaculo);
         this.iteracion = 0;
       }
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, "images/blueObstacle.png");
+        let obstaculo = new Obstaculo(this.canvas, 0, 200, 600, 4, "images/blueObstacle.png");
         this.obstaculos.push(obstaculo);
         this.iteracion = 0;
       }

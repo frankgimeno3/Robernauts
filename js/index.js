@@ -2,16 +2,13 @@
 window.onload = () => {
   //cuando haya cargado window ejecuta código
 
-const btn = document.getElementById('titleGame');
-btn.addEventListener('click', () => {
-  btn.style.display = 'none';
-});
+  const btn = document.getElementById('titleGame');
+  btn.addEventListener('click', () => {
+    btn.style.display = 'none';
+  });
 
-
-
-  //prueba
-    const TOP_LIMIT_ROBERNAUT = 140;
-    const DOWN_LIMIT_ROBERNAUT = 400;
+    const TOP_LIMIT_ROBERNAUT = 100;
+    const DOWN_LIMIT_ROBERNAUT = 450;
 
   class Robernaut {
     constructor() {
@@ -62,9 +59,9 @@ btn.addEventListener('click', () => {
     changeColorBlue(){
         this.robernautImg.src = "images/astro_blue.png";
         this.astronautColor = "blue";
-
     }
-     }
+  }
+
   class Obstaculo {
     constructor(canvas, y, w, h,vel, src, type) {
       this.y = y;
@@ -74,9 +71,6 @@ btn.addEventListener('click', () => {
       this.vel = vel;
       this.obstacleImg = new Image();
       this.obstacleImg.src = src;
-
-
-
       this.type = type;
     }
     print(ctx) {
@@ -101,23 +95,17 @@ btn.addEventListener('click', () => {
       this.fondoImg = document.createElement("img");
       this.fondoImg.src = "images/backgroundSpace.jpg";
       this.astronaut = new Robernaut();
-
-      ////
-
-      
-      // this.obstaculo = new Obstaculo();
       this.obstaculos = [];
       this.score = 0;
       this.intervalId = undefined;
       this.iteracion = 0;
-      this.lives = 3;
+      this.lives = 300;
     }
     start() {
       // if(!this.intervalId) {
       if(this.intervalId == undefined) {
         this.intervalId = setInterval(()=>{
           this.iteracion ++;
-
           //borra
           this.clear();
           //recalcula + genera obstaculos
@@ -130,9 +118,14 @@ btn.addEventListener('click', () => {
     stop() {
       if(this.intervalId) clearInterval(this.intervalId);
     }
+    lifelossAnimation(){
+      console.log(this.lives)
+    }
     damage(){
       this.lives --;
-      lifelossAnimation();
+      if(this.lives>0){lifelossAnimation();
+      }
+      else{this.stop()}
     }
     clear() {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -147,21 +140,20 @@ btn.addEventListener('click', () => {
         obstaculo.print(this.ctx);
       });
     }
-    recalculate() {
+    recalculate() {                                                    
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
         let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
         this.obstaculos.push(obstaculoMeteorito);
         this.iteracion = 0;
-
       }
 
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculoRojo = new Obstaculo(this.canvas, 0, 200, 600, "images/redObstacle.png", "redStarship");
-        this.obstaculos.push(obstaculo);
+        let obstaculoRojo = new Obstaculo(this.canvas, 0, 200, 600, 6, "images/redObstacle.png", "redStarship");
+        this.obstaculos.push(obstaculoRojo);
         this.iteracion = 0;
       }
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculoAzul = new Obstaculo(this.canvas, 0, 200, 600, "images/blueObstacle.png", "blueStarship");
+        let obstaculoAzul = new Obstaculo(this.canvas, 0, 200, 600, 6, "images/blueObstacle.png", "blueStarship");
         this.obstaculos.push(obstaculoAzul);
         this.iteracion = 0;
       }
@@ -174,7 +166,7 @@ btn.addEventListener('click', () => {
             if(this.astronaut.astronautColor == "blue"){
               if(obstaculo.type == "redStarship" || obstaculo.type == "meteor"){
                 console.log("PETA BLUE")
-                this.stop();}
+                this.damage();}
             }
             if(this.astronaut.astronautColor == "red"){
               if(obstaculo.type == "blueStarship" || obstaculo.type == "meteor"){

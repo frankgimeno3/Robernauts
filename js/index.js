@@ -189,7 +189,7 @@ window.onload = () => {
   
 
   function startGame() {
-   
+ 
     juego.start();
   }
 

@@ -121,7 +121,7 @@ window.onload = () => {
           this.print();
         }, 20);
       }
-      setTimeout(()=>{this.stop()},3000)
+      setTimeout(()=>{this.stop()},60000)
 
     }
     stop() {
@@ -134,7 +134,7 @@ window.onload = () => {
       if(this.lifes>0){
         if(this.intervalId) clearInterval(this.intervalId);
       const won = document.getElementById("youwon");
-      won.style.display = "inline";                                                                                                    
+      won.style.display = "block";                                                                                                    
       won.addEventListener('click', ()=>{  location.reload()})
       }
     }

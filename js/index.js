@@ -14,7 +14,7 @@ window.onload = () => {
     constructor() {
       this.x = 20;
       this.y = 250;
-      this.w = 60;
+      this.w = 80;
       this.h = 90;
       this.propulsion = 2;
       this.robernautImg = new Image();
@@ -128,30 +128,38 @@ window.onload = () => {
       rst.style.display = "inline";
       rst.addEventListener('click', ()=>{  location.reload()})
     }
-    damagedSwap(){
-      if(! this.astronaut.color == 'red' || 'blue' ){
-        this.astronaut.changeColorGrey()
-        setTimeout(()=>{changeColorOrange()},500)
-      }
-      }
-    lossofLife(){
-      this.astronaut.changeColorOrange()
-      setInterval(damagedSwap(),500)
-      setTimeout(()=>{this.astronaut.changeColorRed},3000)
-
-    }
+      
     damage(){
-      if(this.astronaut.damaged == false){
+      if(this.lifes>1){
+        if(this.astronaut.damaged == false){
         this.astronaut.damaged = true
         this.lifes -=1
-        this.lossofLife()
-        setTimeout(()=>{this.astronaut.damaged=false}, 350)
+        }
+        if(this.astronaut.astronautColor == "red"){
+          this.astronaut.changeColorGrey()
+          setTimeout(()=>{this.astronaut.changeColorRed()},1800)
+        }
+        if(this.astronaut.astronautColor == "blue"){
+          this.astronaut.changeColorGrey()
+          setTimeout(()=>{this.astronaut.changeColorBlue()},1800)
+        }    
+        setTimeout(()=>{this.astronaut.damaged=false}, 2000)
+        console.log(this.lifes)
+      }
+      else if(this.lifes == 1){
+        if(this.astronaut.damaged == false){
+          this.astronaut.damaged = true
+          this.lifes -=1
+          }
+      }
+      else{
+        this.astronaut.robernautImg.src = "images/plof.png";
+        this.astronaut.w = 100;
+        this.astronaut.h = 100;
+        setTimeout(()=>{this.stop()},100)
+        
+      }
     }
-    console.log(this.lifes)
-    if(this.lifes == 0){
-      this.stop()
-    }
-  }
   clear() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }

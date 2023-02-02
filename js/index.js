@@ -134,7 +134,7 @@ window.onload = () => {
         if(this.astronaut.damaged == false){
         this.astronaut.damaged = true
         this.lifes -=1
-        vds.innerHTML = "lives: * *";
+        // vds.innerHTML = "lives: * *";
       
         }
         if(this.astronaut.astronautColor == "red"){
@@ -259,7 +259,7 @@ const vds = document.getElementById("livesCount");
 const btn = document.getElementById('titleGame');
   btn.addEventListener('click', () => {
     btn.style.display = 'none';
-    vds.style.display = 'inline';
+    // vds.style.display = 'inline';
     // vds.innerHTML = "lives: * *";
 
     startGame();

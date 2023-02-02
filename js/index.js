@@ -7,8 +7,8 @@ window.onload = () => {
   //   btn.style.display = 'none';
   // });
 
-  const TOP_LIMIT_colorNAUT = 200;
-  const DOWN_LIMIT_colorNAUT = 550;
+  const TOP_LIMIT_colorNAUT = 150;
+  const DOWN_LIMIT_colorNAUT = 425;
 
   class colornaut {
     constructor() {
@@ -111,7 +111,7 @@ window.onload = () => {
     }
     start() {      
       const audioBackground = new Audio("audio.mp3");
-      audioBackground.volume = 0.2;
+      audioBackground.volume = 0.1;
       audioBackground.play();
       if(this.intervalId == undefined) {
         this.intervalId = setInterval(()=>{
@@ -199,7 +199,7 @@ window.onload = () => {
     }
     recalculate() {
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
-        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*350)+200), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
+        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*275)+150), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
         this.obstaculos.push(obstaculoMeteorito);
         this.iteracion = 0;
       }

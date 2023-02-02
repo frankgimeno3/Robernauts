@@ -89,7 +89,8 @@ window.onload = () => {
     }
 
     accelerate(){
-      this.x -=10;
+      this.vel +=20;
+      console.log("fiuuum")
     }
 
     
@@ -109,7 +110,9 @@ window.onload = () => {
       this.lifes = 3;
     }
     start() {      
-      // if(!this.intervalId) {
+      const audioBackground = new Audio("audio.mp3");
+      audioBackground.volume = 0.2;
+      audioBackground.play();
       if(this.intervalId == undefined) {
         this.intervalId = setInterval(()=>{
           this.iteracion ++;
@@ -124,6 +127,7 @@ window.onload = () => {
       setTimeout(()=>{this.stop()},60000)
 
     }
+
     stop() {
       if(this.lifes<=0){
         if(this.intervalId) clearInterval(this.intervalId);
@@ -144,20 +148,15 @@ window.onload = () => {
         if(this.astronaut.damaged == false){
         this.astronaut.damaged = true
         this.lifes -=1
-        // vds.innerHTML = "lives: * *";
-      
-        }
-        if(this.astronaut.astronautColor == "red"){
-          this.astronaut.changeColorGrey()
-          setTimeout(()=>{this.astronaut.changeColorRed()},1800)
-        }
-        if(this.astronaut.astronautColor == "blue"){
-          this.astronaut.changeColorGrey()
-          setTimeout(()=>{this.astronaut.changeColorBlue()},1800)
-        
-        }    
-        setTimeout(()=>{this.astronaut.damaged=false}, 2000)
-        console.log(this.lifes)
+      }
+      if(this.astronaut.astronautColor == "red"){
+        this.astronaut.changeColorGrey()
+      }
+      if(this.astronaut.astronautColor == "blue"){
+        this.astronaut.changeColorGrey()
+      }    
+      setTimeout(()=>{this.astronaut.damaged=false}, 500)
+      console.log(this.lifes)
       }
       else if(this.lifes == 1){
         if(this.astronaut.damaged == false){
@@ -166,11 +165,23 @@ window.onload = () => {
           }
       }
       else{
+        const audioPlof = new Audio("plof.mp3");
+        audioPlof.play();
         this.astronaut.colornautImg.src = "images/plof.png";
         this.astronaut.w = 100;
         this.astronaut.h = 100;
-        setTimeout(()=>{this.stop()},100)
-        
+
+        setTimeout(()=>{this.stop()},100) 
+      }
+
+      if(this.lifes==2){
+        vds.innerHTML = "LIVES: 002";
+      }
+      if(this.lifes==1){
+        vds.innerHTML = "LIVES: 001";
+      }
+      if(this.lifes<=0){
+        vds.innerHTML = "YOU DIED";
       }
     }
   clear() {
@@ -194,12 +205,12 @@ window.onload = () => {
       }
 
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculoRojo = new Obstaculo(this.canvas, 10, 200, 786, 6, "images/redObstacle.png", "redStarship");
+        let obstaculoRojo = new Obstaculo(this.canvas, 10, 200, 615, 6, "images/redObstacle.png", "redStarship");
         this.obstaculos.push(obstaculoRojo);
         this.iteracion = 0;
       }
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculoAzul = new Obstaculo(this.canvas, 10, 200, 786, 6, "images/blueObstacle.png", "blueStarship");
+        let obstaculoAzul = new Obstaculo(this.canvas, 10, 200, 615, 6, "images/blueObstacle.png", "blueStarship");
         this.obstaculos.push(obstaculoAzul);
         this.iteracion = 0;
       }
@@ -213,11 +224,32 @@ window.onload = () => {
               if(obstaculo.type == "redStarship" || obstaculo.type == "meteor"){
                 console.log("PETA BLUE")
                 this.damage();}
-            }
+                
+                if(obstaculo.type == "meteor" && this.lifes > 0){
+                  const crash = new Audio("crash.mp3");
+                  crash.play();}
+                if(obstaculo.type == "redStarship" && this.lifes > 0){
+                  const zap = new Audio("zap.mp3");
+                  zap.play();
+                }
+                }
+
+            
             if(this.astronaut.astronautColor == "red"){
               if(obstaculo.type == "blueStarship" || obstaculo.type == "meteor"){
                 console.log("PETA RED")
                 this.damage();}
+                
+                if(obstaculo.type == "meteor" && this.lifes > 0){
+                  const crash = new Audio("crash.mp3");
+                  crash.play();}
+        
+              if(obstaculo.type == "blueStarship" && this.lifes > 0){
+                  const zap = new Audio("zap.mp3");
+                  zap.play();
+              }
+
+             
             }
           }
         }
@@ -240,7 +272,6 @@ window.onload = () => {
     switch(event.key) {
       case "ArrowUp":
         juego.astronaut.jetpackUp();  
-      
         break;
       case "ArrowDown":
         juego.astronaut.jetpackDown();
@@ -251,10 +282,9 @@ window.onload = () => {
       case "ArrowRight":
           juego.astronaut.changeColorBlue();
         break;
-      case "Spacebar":
-          juego.Obstaculo.accelerate();
+      case "Space":
+        console.log("Space");
         break;
-        
     }
   });
 

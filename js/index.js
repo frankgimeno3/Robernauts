@@ -108,7 +108,7 @@ window.onload = () => {
       this.iteracion = 0;
       this.lifes = 3;
     }
-    start() {
+    start() {      
       // if(!this.intervalId) {
       if(this.intervalId == undefined) {
         this.intervalId = setInterval(()=>{
@@ -121,20 +121,21 @@ window.onload = () => {
           this.print();
         }, 20);
       }
-      setTimeout(()=>{this.stop()},600000)
+      setTimeout(()=>{this.stop()},3000)
 
     }
     stop() {
-      if(this.intervalId) clearInterval(this.intervalId);
-      if(lifes>0){
-      // const rst = document.getElementById("restartGameMenu");
-      // rst.style.display = "inline";
-      // rst.addEventListener('click', ()=>{  location.reload()})
-      }
-      if(lifes<=0){
+      if(this.lifes<=0){
+        if(this.intervalId) clearInterval(this.intervalId);
       const rst = document.getElementById("restartGameMenu");
-      rst.style.display = "inline";                                                                                                    
+      rst.style.display = "inline";
       rst.addEventListener('click', ()=>{  location.reload()})
+      }
+      if(this.lifes>0){
+        if(this.intervalId) clearInterval(this.intervalId);
+      const won = document.getElementById("youwon");
+      won.style.display = "inline";                                                                                                    
+      won.addEventListener('click', ()=>{  location.reload()})
       }
     }
       

@@ -169,13 +169,13 @@ window.onload = () => {
       }
 
       if(this.lifes==2){
-        vds.innerHTML = "lives: 2";
+        vds.innerHTML = "LIVES: 002";
       }
       if(this.lifes==1){
-        vds.innerHTML = "lives: 1";
+        vds.innerHTML = "LIVES: 001";
       }
       if(this.lifes<=0){
-        vds.innerHTML = "lives: 0";
+        vds.innerHTML = "YOU DIED";
       }
     }
   clear() {

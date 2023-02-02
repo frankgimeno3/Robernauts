@@ -7,8 +7,8 @@ window.onload = () => {
   //   btn.style.display = 'none';
   // });
 
-  const TOP_LIMIT_ROBERNAUT = 100;
-  const DOWN_LIMIT_ROBERNAUT = 450;
+  const TOP_LIMIT_ROBERNAUT = 200;
+  const DOWN_LIMIT_ROBERNAUT = 550;
 
   class Robernaut {
     constructor() {
@@ -178,7 +178,7 @@ window.onload = () => {
     }
     recalculate() {
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
-        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
+        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*350)+200), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
         this.obstaculos.push(obstaculoMeteorito);
         this.iteracion = 0;
       }

@@ -109,7 +109,8 @@ window.onload = () => {
       this.lifes = 3;
     }
     start() {      
-      // if(!this.intervalId) {
+      const audio = new Audio("audio.mp3");
+      audio.play();
       if(this.intervalId == undefined) {
         this.intervalId = setInterval(()=>{
           this.iteracion ++;
@@ -121,7 +122,7 @@ window.onload = () => {
           this.print();
         }, 20);
       }
-      setTimeout(()=>{this.stop()},3000)
+      setTimeout(()=>{this.stop()},350000)
 
     }
     stop() {
@@ -144,20 +145,15 @@ window.onload = () => {
         if(this.astronaut.damaged == false){
         this.astronaut.damaged = true
         this.lifes -=1
-        // vds.innerHTML = "lives: * *";
-      
-        }
-        if(this.astronaut.astronautColor == "red"){
-          this.astronaut.changeColorGrey()
-          setTimeout(()=>{this.astronaut.changeColorRed()},1800)
-        }
-        if(this.astronaut.astronautColor == "blue"){
-          this.astronaut.changeColorGrey()
-          setTimeout(()=>{this.astronaut.changeColorBlue()},1800)
-        
-        }    
-        setTimeout(()=>{this.astronaut.damaged=false}, 2000)
-        console.log(this.lifes)
+      }
+      if(this.astronaut.astronautColor == "red"){
+        this.astronaut.changeColorGrey()
+      }
+      if(this.astronaut.astronautColor == "blue"){
+        this.astronaut.changeColorGrey()
+      }    
+      setTimeout(()=>{this.astronaut.damaged=false}, 1000)
+      console.log(this.lifes)
       }
       else if(this.lifes == 1){
         if(this.astronaut.damaged == false){
@@ -169,8 +165,17 @@ window.onload = () => {
         this.astronaut.colornautImg.src = "images/plof.png";
         this.astronaut.w = 100;
         this.astronaut.h = 100;
-        setTimeout(()=>{this.stop()},100)
-        
+        setTimeout(()=>{this.stop()},100) 
+      }
+
+      if(this.lifes==2){
+        vds.innerHTML = "lives: 2";
+      }
+      if(this.lifes==1){
+        vds.innerHTML = "lives: 1";
+      }
+      if(this.lifes<=0){
+        vds.innerHTML = "lives: 0";
       }
     }
   clear() {

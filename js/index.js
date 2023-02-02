@@ -109,8 +109,8 @@ window.onload = () => {
       this.lifes = 3;
     }
     start() {      
-     // const audio = new Audio("audio.mp3");
-      //audio.play();
+      const audio = new Audio("audio.mp3");
+      audio.play();
       if(this.intervalId == undefined) {
         this.intervalId = setInterval(()=>{
           this.iteracion ++;

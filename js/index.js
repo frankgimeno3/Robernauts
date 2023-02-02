@@ -7,8 +7,8 @@ window.onload = () => {
   //   btn.style.display = 'none';
   // });
 
-  const TOP_LIMIT_ROBERNAUT = 100;
-  const DOWN_LIMIT_ROBERNAUT = 450;
+  const TOP_LIMIT_ROBERNAUT = 200;
+  const DOWN_LIMIT_ROBERNAUT = 550;
 
   class Robernaut {
     constructor() {
@@ -133,7 +133,7 @@ window.onload = () => {
       }
       if(lifes<=0){
       const rst = document.getElementById("restartGameMenu");
-      rst.style.display = "inline";
+      rst.style.display = "inline";                                                                                                    
       rst.addEventListener('click', ()=>{  location.reload()})
       }
     }
@@ -143,6 +143,8 @@ window.onload = () => {
         if(this.astronaut.damaged == false){
         this.astronaut.damaged = true
         this.lifes -=1
+        // vds.innerHTML = "lives: * *";
+      
         }
         if(this.astronaut.astronautColor == "red"){
           this.astronaut.changeColorGrey()
@@ -151,6 +153,7 @@ window.onload = () => {
         if(this.astronaut.astronautColor == "blue"){
           this.astronaut.changeColorGrey()
           setTimeout(()=>{this.astronaut.changeColorBlue()},1800)
+        
         }    
         setTimeout(()=>{this.astronaut.damaged=false}, 2000)
         console.log(this.lifes)
@@ -184,7 +187,7 @@ window.onload = () => {
     }
     recalculate() {
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
-        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
+        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*350)+200), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
         this.obstaculos.push(obstaculoMeteorito);
         this.iteracion = 0;
       }
@@ -227,7 +230,6 @@ window.onload = () => {
   
 
   function startGame() {
-   
     juego.start();
 
   }
@@ -261,10 +263,15 @@ window.onload = () => {
 //   this.fondoImg = document.createElement("img");
 //   this.fondoImg.src = "images/backgroundSpace.jpg";
 // }
-
+/////////
+const vds = document.getElementById("livesCount");
+/////
 const btn = document.getElementById('titleGame');
   btn.addEventListener('click', () => {
     btn.style.display = 'none';
+    // vds.style.display = 'inline';
+    // vds.innerHTML = "lives: * *";
+
     startGame();
   });
 

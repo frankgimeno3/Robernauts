@@ -64,6 +64,7 @@ button:hover{
   margin-bottom: 20px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   text-shadow: 0 0 5px rgb(0, 0, 2), 0 0 30px rgba(0, 0, 2 ), 0 0 90px rgba(0, 0, 2), 0 0 150px rgba(0, 0, 2), 0 0 200px rgba(0, 0 ,2), 0 0 300px rgba(0, 0 ,2), 0 0 400px rgba(0, 0, 2), 0 0 500px rgba(0, 0, 2), 0 0 600px rgba(0, 0 ,2), 0 0 700px rgba(0, 0, 2);
+  
 }
 
 #game-board {
@@ -80,6 +81,32 @@ button:hover{
 
 #restartGameMenu{
   display:none;
+  /* position: relative; */
+  position: absolute;
+  top: 10em;
+  left: 340px;
+  
+
+}
+  h2{
+  position: relative;
+  color:  rgba(255, 255, 255, 0.753);
+  top: 2em;
+  left: -100px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 50px;
+  text-shadow: 0 0 5px rgb(0, 0, 2), 0 0 30px rgba(0, 0, 2 ), 0 0 90px rgba(0, 0, 2), 0 0 150px rgba(0, 0, 2), 0 0 200px rgba(0, 0 ,2), 0 0 300px rgba(0, 0 ,2), 0 0 400px rgba(0, 0, 2), 0 0 500px rgba(0, 0, 2), 0 0 600px rgba(0, 0 ,2), 0 0 700px rgba(0, 0, 2);
+  
+}
+#livesCount{
+  position: absolute;
+  top: 4em;
+  left: 200px;
+  color: rgba(255, 255, 255, 0.753);
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  text-shadow: 0 0 5px rgb(0, 0, 2), 0 0 30px rgba(0, 0, 2 ), 0 0 90px rgba(0, 0, 2), 0 0 150px rgba(0, 0, 2), 0 0 200px rgba(0, 0 ,2), 0 0 300px rgba(0, 0 ,2), 0 0 400px rgba(0, 0, 2), 0 0 500px rgba(0, 0, 2), 0 0 600px rgba(0, 0 ,2), 0 0 700px rgba(0, 0, 2);
+  
 }
 
 /* ul{

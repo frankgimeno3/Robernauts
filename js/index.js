@@ -89,7 +89,8 @@ window.onload = () => {
     }
 
     accelerate(){
-      this.x -=10;
+      this.vel +=20;
+      console.log("fiuuum")
     }
 
     
@@ -109,8 +110,9 @@ window.onload = () => {
       this.lifes = 3;
     }
     start() {      
-      const audio = new Audio("audio.mp3");
-      audio.play();
+      const audioBackground = new Audio("audio.mp3");
+      audioBackground.volume = 0.2;
+      audioBackground.play();
       if(this.intervalId == undefined) {
         this.intervalId = setInterval(()=>{
           this.iteracion ++;
@@ -125,6 +127,7 @@ window.onload = () => {
       setTimeout(()=>{this.stop()},60000)
 
     }
+
     stop() {
       if(this.lifes<=0){
         if(this.intervalId) clearInterval(this.intervalId);
@@ -135,7 +138,7 @@ window.onload = () => {
       if(this.lifes>0){
         if(this.intervalId) clearInterval(this.intervalId);
       const won = document.getElementById("youwon");
-      won.style.display = "inline";                                                                                                    
+      won.style.display = "block";                                                                                                    
       won.addEventListener('click', ()=>{  location.reload()})
       }
     }
@@ -162,9 +165,12 @@ window.onload = () => {
           }
       }
       else{
+        const audioPlof = new Audio("plof.mp3");
+        audioPlof.play();
         this.astronaut.colornautImg.src = "images/plof.png";
         this.astronaut.w = 100;
         this.astronaut.h = 100;
+
         setTimeout(()=>{this.stop()},100) 
       }
 
@@ -199,12 +205,12 @@ window.onload = () => {
       }
 
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculoRojo = new Obstaculo(this.canvas, 10, 200, 786, 6, "images/redObstacle.png", "redStarship");
+        let obstaculoRojo = new Obstaculo(this.canvas, 10, 200, 615, 6, "images/redObstacle.png", "redStarship");
         this.obstaculos.push(obstaculoRojo);
         this.iteracion = 0;
       }
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculoAzul = new Obstaculo(this.canvas, 10, 200, 786, 6, "images/blueObstacle.png", "blueStarship");
+        let obstaculoAzul = new Obstaculo(this.canvas, 10, 200, 615, 6, "images/blueObstacle.png", "blueStarship");
         this.obstaculos.push(obstaculoAzul);
         this.iteracion = 0;
       }
@@ -266,7 +272,6 @@ window.onload = () => {
     switch(event.key) {
       case "ArrowUp":
         juego.astronaut.jetpackUp();  
-      
         break;
       case "ArrowDown":
         juego.astronaut.jetpackDown();
@@ -277,10 +282,9 @@ window.onload = () => {
       case "ArrowRight":
           juego.astronaut.changeColorBlue();
         break;
-      case "Spacebar":
-          juego.Obstaculo.accelerate();
+      case "Space":
+        console.log("Space");
         break;
-        
     }
   });
 

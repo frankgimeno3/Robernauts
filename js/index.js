@@ -94,7 +94,7 @@ window.onload = () => {
       this.canvas = document.getElementById("canvas");
       this.ctx = this.canvas.getContext("2d");
       this.fondoImg = document.createElement("img");
-      this.fondoImg.src = "images/backgroundSpace.jpg";
+      // this.fondoImg.src = "images/backgroundSpace.jpg";
       this.astronaut = new Robernaut();
       this.obstaculos = [];
       this.score = 0;
@@ -118,18 +118,26 @@ window.onload = () => {
     }
     stop() {
       if(this.intervalId) clearInterval(this.intervalId);
+      const rst = document.getElementById("restartGameMenu");
+      rst.style.display = "inline";                                                                                                    
+      rst.addEventListener('click', ()=>{  location.reload()})
     }
 
     damage(){
       if(this.astronaut.damaged == false){
         this.astronaut.damaged = true
         this.lifes -=1
+        vds.innerHTML = "lives: * *";
+      //   vds.innerHTML = "lives: * ";
+      // vds.innerHTML = "lives: DEAD";
+
         setTimeout(()=>{this.astronaut.damaged=false}, 350)
       }
       console.log(this.lifes)
       if(this.lifes == 0){
         this.stop()
       }
+
     }
     clear() {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -152,12 +160,12 @@ window.onload = () => {
       }
 
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculoRojo = new Obstaculo(this.canvas, 0, 200, 600, 6, "images/redObstacle.png", "redStarship");
+        let obstaculoRojo = new Obstaculo(this.canvas, 10, 200, 786, 6, "images/redObstacle.png", "redStarship");
         this.obstaculos.push(obstaculoRojo);
         this.iteracion = 0;
       }
       if(this.iteracion == (Math.ceil(Math.random() * 50) + 50)) {
-        let obstaculoAzul = new Obstaculo(this.canvas, 0, 200, 600, 6, "images/blueObstacle.png", "blueStarship");
+        let obstaculoAzul = new Obstaculo(this.canvas, 10, 200, 786, 6, "images/blueObstacle.png", "blueStarship");
         this.obstaculos.push(obstaculoAzul);
         this.iteracion = 0;
       }
@@ -222,10 +230,15 @@ window.onload = () => {
 //   this.fondoImg = document.createElement("img");
 //   this.fondoImg.src = "images/backgroundSpace.jpg";
 // }
-
+/////////
+const vds = document.getElementById("livesCount");
+/////
 const btn = document.getElementById('titleGame');
   btn.addEventListener('click', () => {
     btn.style.display = 'none';
+    vds.style.display = 'inline';
+    // vds.innerHTML = "lives: * *";
+
     startGame();
 
   });

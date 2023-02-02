@@ -7,8 +7,8 @@ window.onload = () => {
   //   btn.style.display = 'none';
   // });
 
-    const TOP_LIMIT_ROBERNAUT = 100;
-    const DOWN_LIMIT_ROBERNAUT = 450;
+  const TOP_LIMIT_ROBERNAUT = 100;
+  const DOWN_LIMIT_ROBERNAUT = 450;
 
   class Robernaut {
     constructor() {
@@ -61,8 +61,14 @@ window.onload = () => {
         this.robernautImg.src = "images/astro_blue.png";
         this.astronautColor = "blue";
     }
-  }
-
+    changeColorOrange(){
+      this.robernautImg.src = "images/astro_orangeFinal.png";
+    }
+    changeColorGrey(){
+        this.robernautImg.src = "images/astro_grey-final.png";
+      }
+     }
+     
   class Obstaculo {
     constructor(canvas, y, w, h,vel, src, type) {
       this.y = y;
@@ -86,7 +92,7 @@ window.onload = () => {
       this.x -=10;
     }
 
-
+    
   }
   
   class Juego {
@@ -122,26 +128,36 @@ window.onload = () => {
       rst.style.display = "inline";                                                                                                    
       rst.addEventListener('click', ()=>{  location.reload()})
     }
+    damagedSwap(){
+      if(! this.astronaut.color == 'red' || 'blue' ){
+        this.astronaut.changeColorGrey()
+        setTimeout(()=>{changeColorOrange()},500)
+      }
+      }
+    lossofLife(){
+      this.astronaut.changeColorOrange()
+      setInterval(damagedSwap(),500)
+      setTimeout(()=>{this.astronaut.changeColorRed},3000)
 
+    }
     damage(){
       if(this.astronaut.damaged == false){
         this.astronaut.damaged = true
         this.lifes -=1
         vds.innerHTML = "lives: * *";
-      //   vds.innerHTML = "lives: * ";
-      // vds.innerHTML = "lives: DEAD";
-
+      
+        this.lossofLife()
         setTimeout(()=>{this.astronaut.damaged=false}, 350)
-      }
-      console.log(this.lifes)
-      if(this.lifes == 0){
-        this.stop()
-      }
-
+        
     }
-    clear() {
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    console.log(this.lifes)
+    if(this.lifes == 0){
+      this.stop()
     }
+  }
+  clear() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
     print() {
       //fondo
       this.ctx.drawImage(this.fondoImg, 0, 0, this.canvas.width, this.canvas.height);
@@ -152,7 +168,7 @@ window.onload = () => {
         obstaculo.print(this.ctx);
       });
     }
-    recalculate() {                                                    
+    recalculate() {
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
         let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+100), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
         this.obstaculos.push(obstaculoMeteorito);
@@ -197,7 +213,6 @@ window.onload = () => {
   
 
   function startGame() {
- 
     juego.start();
   }
 

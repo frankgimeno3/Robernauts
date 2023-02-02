@@ -134,6 +134,8 @@ window.onload = () => {
         if(this.astronaut.damaged == false){
         this.astronaut.damaged = true
         this.lifes -=1
+        vds.innerHTML = "lives: * *";
+      
         }
         if(this.astronaut.astronautColor == "red"){
           this.astronaut.changeColorGrey()
@@ -142,6 +144,7 @@ window.onload = () => {
         if(this.astronaut.astronautColor == "blue"){
           this.astronaut.changeColorGrey()
           setTimeout(()=>{this.astronaut.changeColorBlue()},1800)
+        
         }    
         setTimeout(()=>{this.astronaut.damaged=false}, 2000)
         console.log(this.lifes)

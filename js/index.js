@@ -124,7 +124,7 @@ window.onload = () => {
           this.print();
         }, 20);
       }
-      
+ 
       setTimeout(()=>{this.stop()},60000)
     }
 
@@ -155,7 +155,7 @@ window.onload = () => {
       if(this.astronaut.astronautColor == "blue"){
         this.astronaut.changeColorGrey()
       }    
-      setTimeout(()=>{this.astronaut.damaged=false}, 1000)
+      setTimeout(()=>{this.astronaut.damaged=false}, 500)
       console.log(this.lifes)
       }
       else if(this.lifes == 1){
@@ -224,11 +224,32 @@ window.onload = () => {
               if(obstaculo.type == "redStarship" || obstaculo.type == "meteor"){
                 console.log("PETA BLUE")
                 this.damage();}
-            }
+                
+                if(obstaculo.type == "meteor" && this.lifes > 0){
+                  const crash = new Audio("crash.mp3");
+                  crash.play();}
+                if(obstaculo.type == "redStarship" && this.lifes > 0){
+                  const zap = new Audio("zap.mp3");
+                  zap.play();
+                }
+                }
+
+            
             if(this.astronaut.astronautColor == "red"){
               if(obstaculo.type == "blueStarship" || obstaculo.type == "meteor"){
                 console.log("PETA RED")
                 this.damage();}
+                
+                if(obstaculo.type == "meteor" && this.lifes > 0){
+                  const crash = new Audio("crash.mp3");
+                  crash.play();}
+        
+              if(obstaculo.type == "blueStarship" && this.lifes > 0){
+                  const zap = new Audio("zap.mp3");
+                  zap.play();
+              }
+
+             
             }
           }
         }

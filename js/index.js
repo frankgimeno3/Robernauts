@@ -121,12 +121,21 @@ window.onload = () => {
           this.print();
         }, 20);
       }
+      setTimeout(()=>{this.stop()},600000)
+
     }
     stop() {
       if(this.intervalId) clearInterval(this.intervalId);
+      if(lifes>0){
+      // const rst = document.getElementById("restartGameMenu");
+      // rst.style.display = "inline";
+      // rst.addEventListener('click', ()=>{  location.reload()})
+      }
+      if(lifes<=0){
       const rst = document.getElementById("restartGameMenu");
       rst.style.display = "inline";
       rst.addEventListener('click', ()=>{  location.reload()})
+      }
     }
       
     damage(){
@@ -220,6 +229,7 @@ window.onload = () => {
   function startGame() {
    
     juego.start();
+
   }
 
   // document.body.addEventListener()
@@ -256,7 +266,6 @@ const btn = document.getElementById('titleGame');
   btn.addEventListener('click', () => {
     btn.style.display = 'none';
     startGame();
-
   });
 
 //obstaculos

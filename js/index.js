@@ -7,28 +7,28 @@ window.onload = () => {
   //   btn.style.display = 'none';
   // });
 
-  const TOP_LIMIT_ROBERNAUT = 200;
-  const DOWN_LIMIT_ROBERNAUT = 550;
+  const TOP_LIMIT_colorNAUT = 200;
+  const DOWN_LIMIT_colorNAUT = 550;
 
-  class Robernaut {
+  class colornaut {
     constructor() {
       this.x = 20;
       this.y = 250;
       this.w = 80;
       this.h = 90;
       this.propulsion = 2;
-      this.robernautImg = new Image();
-      this.robernautImg.src = "images/astro_red.png";
+      this.colornautImg = new Image();
+      this.colornautImg.src = "images/astro_red.png";
       this.astronautColor = "red";
       this.isTransparent = false;
       this.damaged=false;
     }
     print(ctx) {
-      ctx.drawImage(this.robernautImg, this.x, this.y, this.w, this.h);
+      ctx.drawImage(this.colornautImg, this.x, this.y, this.w, this.h);
     }
     
     jetpackUp() {
-      if(this.y <= TOP_LIMIT_ROBERNAUT) this.y = TOP_LIMIT_ROBERNAUT;
+      if(this.y <= TOP_LIMIT_colorNAUT) this.y = TOP_LIMIT_colorNAUT;
       this.y -= this.propulsion;
       this.y -= this.propulsion;
       this.y -= this.propulsion;
@@ -42,7 +42,7 @@ window.onload = () => {
 
     }
     jetpackDown() {
-      if(this.y >= DOWN_LIMIT_ROBERNAUT) this.y = DOWN_LIMIT_ROBERNAUT;
+      if(this.y >= DOWN_LIMIT_colorNAUT) this.y = DOWN_LIMIT_colorNAUT;
       this.y += this.propulsion;
       this.y += this.propulsion;
       this.y += this.propulsion;
@@ -55,17 +55,17 @@ window.onload = () => {
 
     changeColorRed(){
         this.astronautColor = "red";
-        this.robernautImg.src = "images/astro_red.png";
+        this.colornautImg.src = "images/astro_red.png";
       }
     changeColorBlue(){
-        this.robernautImg.src = "images/astro_blue.png";
+        this.colornautImg.src = "images/astro_blue.png";
         this.astronautColor = "blue";
     }
     changeColorOrange(){
-      this.robernautImg.src = "images/astro_orangeFinal.png";
+      this.colornautImg.src = "images/astro_orangeFinal.png";
     }
     changeColorGrey(){
-        this.robernautImg.src = "images/astro_grey-final.png";
+        this.colornautImg.src = "images/astro_grey-final.png";
       }
      }
      
@@ -101,7 +101,7 @@ window.onload = () => {
       this.ctx = this.canvas.getContext("2d");
       this.fondoImg = document.createElement("img");
       // this.fondoImg.src = "images/backgroundSpace.jpg";
-      this.astronaut = new Robernaut();
+      this.astronaut = new colornaut();
       this.obstaculos = [];
       this.score = 0;
       this.intervalId = undefined;
@@ -166,7 +166,7 @@ window.onload = () => {
           }
       }
       else{
-        this.astronaut.robernautImg.src = "images/plof.png";
+        this.astronaut.colornautImg.src = "images/plof.png";
         this.astronaut.w = 100;
         this.astronaut.h = 100;
         setTimeout(()=>{this.stop()},100)

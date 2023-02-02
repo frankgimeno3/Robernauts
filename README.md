@@ -1,10 +1,10 @@
-# Robernauts
+# colornauts
 
 Developed as the first project of my our fullstack development bootcamp at Ironhack Barcelona.
 
 ## About me
 
-Hi! We are Roberto, Mario and Frank. We are web developers. This project is platform game, in which an astronaut (Robernaut) has to survive an alien attack, flying with his jetpack.
+Hi! We are colorto, Mario and Frank. We are web developers. This project is platform game, in which an astronaut (colornaut) has to survive an alien attack, flying with his jetpack.
 
 ## Deployment
 
@@ -12,11 +12,11 @@ You can play the game [here](#).
 
 ## Work structure
 
-We developed this project alone and used [Trello](https://trello.com/b/jXrH2KZw/robernauts) to organize our workflow.
+We developed this project alone and used [Trello](https://trello.com/b/jXrH2KZw/colornauts) to organize our workflow.
 
 ## About the game
 
-In this game you can control the robernaut using the arrows; up to fly up, down to fly down, left and right to swap color.
+In this game you can control the colornaut using the arrows; up to fly up, down to fly down, left and right to swap color.
 You will have to dodge obstacles, or turn your color red or blue to be able to fly through alien rays without receiving damamge.
 
 Survive for some minutes and you will be able to scape with your space ship. Loose all your lifes and you will die and fail.
@@ -40,7 +40,7 @@ Loose all your lives.
 
 |   Class   | Properties                                                                 | Methods                                           |
 | :-------: | ---------------------------------------------------------------------------|---------------------------------------------------|
-| Robernaut | x, y, w, h, propulsion, IMG, astronautColor, isTransparent                 | print(ctx), jetpackUp, jetpackDown, changeColorRed|
+| colornaut | x, y, w, h, propulsion, IMG, astronautColor, isTransparent                 | print(ctx), jetpackUp, jetpackDown, changeColorRed|
 | Obstacule | x, y, w, h, vel, obstacleImg                                               | print(ctx), move()                                |
 | Juego     | canvas, ctx, fondoImg, astronaut, obstaculos, score, intervalId, Iteracion |start, stop, clear, print, recalculate             |
 ---

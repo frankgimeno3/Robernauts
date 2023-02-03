@@ -111,7 +111,7 @@ window.onload = () => {
     }
     start() {      
       const audioBackground = new Audio("audio.mp3");
-      audioBackground.volume = 0.2;
+      audioBackground.volume = 0.1;
       audioBackground.play();
       if(this.intervalId == undefined) {
         this.intervalId = setInterval(()=>{

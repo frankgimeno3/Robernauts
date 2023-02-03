@@ -7,8 +7,8 @@ window.onload = () => {
   //   btn.style.display = 'none';
   // });
 
-  const TOP_LIMIT_colorNAUT = 200;
-  const DOWN_LIMIT_colorNAUT = 550;
+  const TOP_LIMIT_colorNAUT = 150;
+  const DOWN_LIMIT_colorNAUT = 450;
 
   class colornaut {
     constructor() {
@@ -124,7 +124,7 @@ window.onload = () => {
           this.print();
         }, 20);
       }
-      setTimeout(()=>{this.stop()},60000)
+      setTimeout(()=>{this.stop()}, 60000)
 
     }
 
@@ -199,7 +199,7 @@ window.onload = () => {
     }
     recalculate() {
       if(this.iteracion == (Math.ceil(Math.random() * 30)+5)) {
-        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*350)+200), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
+        let obstaculoMeteorito = new Obstaculo(this.canvas, Math.ceil((Math.random()*300)+150), 150, 60, ((Math.random()*10)+10), "images/jasmin.png", "meteor");
         this.obstaculos.push(obstaculoMeteorito);
         this.iteracion = 0;
       }

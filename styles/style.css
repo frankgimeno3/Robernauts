@@ -100,18 +100,18 @@ button:hover{
   position: absolute;
   left: 0;
   top: 0;
-  height: 800px;
+  height: 550px;
   width: 1500px;
 }
 
 #youwonflex {
   position: absolute;
   left: 0;
-  top: 0;
-  height: 800px;
+  top: 10em;
+  height: 550px;
   width: 1500px;
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
 }
 
   #youwon h3 {
@@ -119,12 +119,11 @@ button:hover{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 50px;
     text-shadow: 0 0 5px rgb(0, 0, 2), 0 0 30px rgba(0, 0, 2 ), 0 0 90px rgba(0, 0, 2), 0 0 150px rgba(0, 0, 2), 0 0 200px rgba(0, 0 ,2), 0 0 300px rgba(0, 0 ,2), 0 0 400px rgba(0, 0, 2), 0 0 500px rgba(0, 0, 2), 0 0 600px rgba(0, 0 ,2), 0 0 700px rgba(0, 0, 2);
-
-}
-#youwon button {
+  }
+  #youwon button {
   position: absolute;
-  left: 630px;
-  top: 12em;
+  left: 660px;
+  top: 7em;
 }
 
   h2{
@@ -147,6 +146,9 @@ button:hover{
   text-shadow: 0 0 5px rgb(0, 0, 2), 0 0 30px rgba(0, 0, 2 ), 0 0 90px rgba(0, 0, 2), 0 0 150px rgba(0, 0, 2), 0 0 200px rgba(0, 0 ,2), 0 0 300px rgba(0, 0 ,2), 0 0 400px rgba(0, 0, 2), 0 0 500px rgba(0, 0, 2), 0 0 600px rgba(0, 0 ,2), 0 0 700px rgba(0, 0, 2);
   
 } 
+
+
+
 
 /* ul{
   position: relative;
